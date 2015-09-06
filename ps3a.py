@@ -239,24 +239,29 @@ def play_hand(hand, word_list):
         while hand[letter] > 0  :
              print "Available letters:",
              display_hand(hand)
-             word = raw_input("What word would you like to play? Done playing? Enter '.' to end game \n")
+             print
+             word = raw_input("What word would you like to play? Done playing? Enter '.' to end game \n \n")
              if is_valid_word(word,hand,word_list):
                 hand = update_hand(hand,word)
                 point = get_word_score(word,n)
                 score += point
-                print "Nice! '%s' earned %d points. You now have %d points" %(word, point, score)
+                print "Nice! '%s' earned %d points. You now have %d points \n" %(word, point, score)
              elif word == ".":
-                print 'Total score: %d points.' % score
+                print 'Total score: %d points. ' % score 
+                print
                 return
              else:
-                print("I'm sorry, that is not a word I recognize")
+                print("I'm sorry, that is not a word I recognize \n")
 
-    print("HAND OVER. Your current score is %d") % score
+    print("HAND OVER. Your current score is %d \n") % score
+    
+  
+
     
 
-n = random.randint(3,7)
-hand = deal_hand(n)
-play_hand(hand,word_list)
+
+n = 7
+
 
 #
 # Problem #5: Playing a game
@@ -277,13 +282,29 @@ def play_game(word_list):
 
     * If the user inputs anything else, ask them again.
     """
-    # TO DO...
-    game_selecton = raw_input("Hello, please choose one of the following selections: choose 'n' to play a new game, 'r' to re-play the last hand, or 'e' to exit the game")
+    # TO DO
+    hand = deal_hand(n)
+    game_counter = 0
 
-    if game_selection == 'n':
-            n = randint(0,7)
+    while True:
+        game_selection = raw_input("Hello, please choose one of the following selections: choose 'n' to play a new game, 'r' to re-play the last hand, or 'e' to exit the game \n")
+  
+    
+        if game_selection == 'n':
             hand = deal_hand(n)
             play_hand(hand,word_list)
+            game_counter += 1
+        
+        elif game_selection == 'r' and game_counter > 0:
+            play_hand(hand.copy(),word_list)
+
+        elif game_selection == 'e':
+            exit()
+        
+        else:
+            print "Invalid command"
+       
+        
             
              
         
